@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request) {
+    public function register(Request $request, User $user) {
         $fields = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
@@ -36,7 +37,7 @@ class AuthController extends Controller
             return ['message' => 'The provided creadentials are incorrect.'];
         }
 
-        $user->createToken($user->name);
+        $token = $user->createToken($user->name);
         
         return [
             'user' => $user,
