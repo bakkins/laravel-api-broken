@@ -35,7 +35,7 @@ class PostController extends Controller implements HasMiddleware
             'password' => 'required'
         ]);
 
-        $post = $request->users()->posts()->create($fields);
+        $post = $request->user()->posts()->create($fields);
 
         // $post = Post::create($fields);
 

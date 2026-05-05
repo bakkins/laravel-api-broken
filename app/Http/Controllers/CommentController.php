@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -33,7 +36,7 @@ class CommentController extends Controller
             'content' => 'required'
         ]);
 
-        $comment = $request->users()->posts()->comments()->create($fields);
+        $comment = $request->user()->comments()->create($fields);
 
 
         return $comment;
